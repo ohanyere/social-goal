@@ -1,10 +1,20 @@
 package main
 
-import "log"
+import (
+	"log"
+	"os"
+	"github.com/joho/godotenv"
+)
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	port := os.Getenv("server_port")
 	cfg := config{
-		addrs: ":8080",
+		addrs: port,
 	}
 
 	app := application{
